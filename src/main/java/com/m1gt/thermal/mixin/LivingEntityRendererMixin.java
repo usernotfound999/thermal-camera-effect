@@ -9,17 +9,18 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Mixin(LivingEntityRenderer.class)
 public class LivingEntityRendererMixin {
 
-    @ModifyArg(
-        method = "render",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/model/EntityModel;renderToBuffer(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;III)V"
-        ),
-        index = 4
-    )
+@ModifyArg(
+    method = "*",
+    at = @At(
+        value = "INVOKE",
+        target = "Lnet/minecraft/client/model/Model;renderToBuffer(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;IIII)V"
+    ),
+    index = 4,
+    require = 0
+)
     private int thermal$whiteColor(int original) {
         if (ThermalClientState.isEnabled()) {
-            return 0xFFFFFFFF; // 纯白，不透明
+            return 0xFFFFFFFF;
         }
         return original;
     }

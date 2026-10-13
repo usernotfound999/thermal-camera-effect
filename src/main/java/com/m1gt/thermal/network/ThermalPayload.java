@@ -7,7 +7,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 
-public record ThermalPayload(boolean enabled) implements CustomPacketPayload {
+public record ThermalPayload(boolean enabled, boolean playersOnly) implements CustomPacketPayload {
 
     public static final CustomPacketPayload.Type<ThermalPayload> TYPE =
         new CustomPacketPayload.Type<>(
@@ -18,6 +18,8 @@ public record ThermalPayload(boolean enabled) implements CustomPacketPayload {
         StreamCodec.composite(
             ByteBufCodecs.BOOL,
             ThermalPayload::enabled,
+            ByteBufCodecs.BOOL,
+            ThermalPayload::playersOnly,
             ThermalPayload::new
         );
 

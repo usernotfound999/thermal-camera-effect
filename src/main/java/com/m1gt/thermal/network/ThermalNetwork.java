@@ -1,5 +1,6 @@
 package com.m1gt.thermal.network;
 
+import com.m1gt.thermal.client.ThermalClientState;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -12,13 +13,18 @@ public class ThermalNetwork {
         registrar.playToClient(
             ThermalPayload.TYPE,
             ThermalPayload.STREAM_CODEC,
-            (payload, context) -> context.enqueueWork(() ->
-                com.m1gt.thermal.client.ThermalClientState.setEnabled(payload.enabled())
-            )
+            (payload, context) -> context.enqueueWork(() -> {
+                ThermalClientState.setEnabled(payload.enabled());
+                ThermalClientState.setGlowMode(
+                    payload.playersOnly()
+                        ? ThermalClientState.GlowMode.PLAYERS_ONLY
+                        : ThermalClientState.GlowMode.ALL_ENTITIES
+                );
+            })
         );
     }
 
-    public static void sendToPlayer(ServerPlayer player, boolean enabled) {
-        PacketDistributor.sendToPlayer(player, new ThermalPayload(enabled));
+    public static void sendToPlayer(ServerPlayer player, boolean enabled, boolean playersOnly) {
+        PacketDistributor.sendToPlayer(player, new ThermalPayload(enabled, playersOnly));
     }
 }

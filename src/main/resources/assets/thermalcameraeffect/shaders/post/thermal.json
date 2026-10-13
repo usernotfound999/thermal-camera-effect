@@ -1,13 +1,10 @@
 {
-  "targets": [ "swap", "final" ],
+  "targets": [ "swap" ],
   "passes": [
     {
       "name": "thermalcameraeffect:thermal",
       "intarget": "minecraft:main",
-      "outtarget": "swap",
-      "auxtargets": [
-        { "name": "EntitySampler", "id": "final" }
-      ]
+      "outtarget": "swap"
     },
     {
       "name": "blit",

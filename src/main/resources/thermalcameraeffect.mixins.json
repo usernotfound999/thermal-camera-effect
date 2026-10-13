@@ -4,7 +4,10 @@
   "package": "com.m1gt.thermal.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "GameRendererMixin"
+    //"GameRendererMixin",
+    "EntityGlowMixin",
+    "LivingEntityRendererMixin"
+    //"PostChainMixin"
   ],
   "injectors": {
     "defaultRequire": 1

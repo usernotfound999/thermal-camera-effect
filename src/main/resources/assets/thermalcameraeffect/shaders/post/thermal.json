@@ -2,7 +2,7 @@
   "targets": [ "swap", "final" ],
   "passes": [
     {
-      "name": "thermal",
+      "name": "thermalcameraeffect:thermal",
       "intarget": "minecraft:main",
       "outtarget": "swap",
       "auxtargets": [

@@ -1,0 +1,18 @@
+{
+  "targets": [ "swap", "final" ],
+  "passes": [
+    {
+      "name": "thermal",
+      "intarget": "minecraft:main",
+      "outtarget": "swap",
+      "auxtargets": [
+        { "name": "EntitySampler", "id": "final" }
+      ]
+    },
+    {
+      "name": "blit",
+      "intarget": "swap",
+      "outtarget": "minecraft:main"
+    }
+  ]
+}

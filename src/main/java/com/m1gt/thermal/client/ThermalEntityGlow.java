@@ -11,7 +11,7 @@ import net.neoforged.neoforge.client.event.RenderLivingEvent;
 public class ThermalEntityGlow {
 
     @SubscribeEvent
-    public static void onRenderLiving(RenderLivingEvent.Pre<?, ?, ?> event) {
+        public static void onRenderLiving(RenderLivingEvent.Pre<?, ?> event) {
         if (!ThermalClientState.isEnabled()) return;
         LivingEntity entity = event.getEntity();
         // 让生物发光，原版会把它渲染成实心剪影到 entityEffect 的 final target
